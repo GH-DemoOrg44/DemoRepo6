@@ -1,0 +1,32 @@
+from git import Repo
+
+def create_repository(local_path, repo_name):
+    try:
+        # Initialize a new repository
+        repo = Repo.init(local_path)
+        print("Repository initialized successfully.")
+        
+        # Create a README file
+        with open(f"{local_path}/README.md", "w") as readme:
+            readme.write("# Welcome to My Repository!\n\nThis is a new repository created using GitPython.")
+        print("README file created successfully.")
+        
+        # Stage the README file
+        repo.index.add(["README.md"])
+        print("README file staged successfully.")
+        
+        # Commit the changes
+        repo.index.commit("Initial commit: Add README.md")
+        print("Changes committed successfully.")
+        
+        # Create a remote repository (optional)
+        # To create a remote repository, you need to have the appropriate permissions on the hosting service (e.g., GitHub, GitLab)
+        # repo.create_remote(repo_name, url="https://github.com/your_username/repo_name.git")
+        # print("Remote repository created successfully.")
+        
+        print("Repository creation completed successfully.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+# Example usage:
+create_repository("/path/to/your/local/repository", "repo_name")
